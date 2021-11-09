@@ -3,10 +3,7 @@ import 'package:task_planner/tasks.dart';
 
 final databaseReference = FirebaseDatabase.instance.reference();
 
-saveTasks(String task) {
-  databaseReference.child("task").set(task);
-}
-
-Future<DataSnapshot> getAllTasks() {
-  return databaseReference.child("task").get();
+void saveTasks(String task, String description) {
+//   databaseReference.child("task").set(task);
+  databaseReference.push().set({"task1": task, "description": description});
 }

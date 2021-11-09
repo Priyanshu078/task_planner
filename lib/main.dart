@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -49,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           // Task task = Task("Study DSAlgo", "Geeks for Geeks");
-          saveTasks("DS Algo");
+          saveTasks("Assigmnet", "Complete Today");
         },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
