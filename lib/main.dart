@@ -1,7 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:task_planner/database.dart';
 // import 'package:task_planner/tasks.dart';
 
@@ -41,13 +39,44 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        actions: [
+          TextButton(
+              onPressed: () {
+                getTasks();
+              },
+              child: const Text(
+                "get tasks",
+                style: TextStyle(color: Colors.white),
+              )),
+        ],
       ),
       body: Center(
-        child: FutureBuilder(
-          future: getTasks(),
-        )
-        ),
-      ),
+          child: FutureBuilder(
+              future: getTasks(),
+              builder: (context, snapshot) {
+                // if (snapshot.connectionState == ConnectionState.done) {
+                // if (snapshot.hasData) {
+                // return ListView.builder(
+                //         itemCount: snapshot.data.length,
+                //         itemBuilder: (context, index) {
+                //           return ListTile(
+                //             title: Text(snapshot.data[index].taskName),
+                //             subtitle: Text(snapshot.data[index].description),
+                //           );
+                //         });
+                //   } else if (snapshot.hasError) {
+                //     ScaffoldMessenger.of(context)
+                //         .showSnackBar(SnackBar(content: Text(snapshot.error)));
+                //   } else {
+                //     return const Center(
+                //       child: CircularProgressIndicator(),
+                //     );
+                //   }
+                // }
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              })),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           taskController.text = "";

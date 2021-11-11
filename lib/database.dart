@@ -5,14 +5,19 @@ final databaseReference = FirebaseDatabase.instance.reference();
 Map tasks = {};
 void saveTasks(String task, String description) {
 //   databaseReference.child("task").set(task);
-  databaseReference.push().set({"task1": task, "description": description});
+  databaseReference.push().set({"task": task, "description": description});
 }
 
-Future<List> getTasks() async {
+Future<List<Task>> getTasks() async {
   DataSnapshot dataSnapshot = await databaseReference.once();
   Map data = dataSnapshot.value;
   List keysList = data.keys.toList();
+  List<Task> tasks = [];
   for (var item in keysList) {
-    print(data[item]);
+    print(item);
+    // Task task = Task(item["task"], item["description"]);
+    // tasks.add(task);
   }
+  print(tasks);
+  return tasks;
 }
