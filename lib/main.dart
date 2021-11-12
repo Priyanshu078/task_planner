@@ -42,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
         actions: [
           TextButton(
               onPressed: () {
-                getTasks();
+                setState(() {});
               },
               child: const Text(
                 "get tasks",
@@ -54,25 +54,34 @@ class _MyHomePageState extends State<MyHomePage> {
           child: FutureBuilder(
               future: getTasks(),
               builder: (context, snapshot) {
-                // if (snapshot.connectionState == ConnectionState.done) {
-                // if (snapshot.hasData) {
-                // return ListView.builder(
-                //         itemCount: snapshot.data.length,
-                //         itemBuilder: (context, index) {
-                //           return ListTile(
-                //             title: Text(snapshot.data[index].taskName),
-                //             subtitle: Text(snapshot.data[index].description),
-                //           );
-                //         });
-                //   } else if (snapshot.hasError) {
-                //     ScaffoldMessenger.of(context)
-                //         .showSnackBar(SnackBar(content: Text(snapshot.error)));
-                //   } else {
-                //     return const Center(
-                //       child: CircularProgressIndicator(),
-                //     );
-                //   }
-                // }
+                if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.hasData) {
+                    return ListView.builder(
+                        itemCount: snapshot.data.length,
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            onTap: () {
+                              setState(() {});
+                            },
+                            trailing: IconButton(
+                                onPressed: () {
+                                  deleteTask(index);
+                                  setState(() {});
+                                },
+                                icon: const Icon(Icons.delete)),
+                            title: Text(snapshot.data[index].taskName),
+                            subtitle: Text(snapshot.data[index].description),
+                          );
+                        });
+                  } else if (snapshot.hasError) {
+                    ScaffoldMessenger.of(context)
+                        .showSnackBar(SnackBar(content: Text(snapshot.error)));
+                  } else {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                }
                 return const Center(
                   child: CircularProgressIndicator(),
                 );
