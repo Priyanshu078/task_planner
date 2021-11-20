@@ -1,6 +1,8 @@
 # task_planner
 
 This is a mobile application used to plan your day to day tasks.
+Firebase realtime database is used to save tasks.
+Provider is used for statement.
 
 ## Getting Started
 
